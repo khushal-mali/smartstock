@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  email        String     @unique
+  passwordHash String
+  role         Role       @default(STAFF)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  purchases    Purchase[]
+  sales        Sale[]
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+}
+
+model Supplier {
+  id        Int        @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String
+  products  Product[]
+  purchases Purchase[]
+  createdAt DateTime   @default(now())
+}
+
+model Product {
+  id            Int            @id @default(autoincrement())
+  sku           String         @unique
+  name          String
+  price         Decimal        @db.Decimal(10, 2)
+  quantity      Int            @default(0)
+  reorderLevel  Int            @default(10)
+  categoryId    Int
+  supplierId    Int
+  category      Category       @relation(fields: [categoryId], references: [id])
+  supplier      Supplier       @relation(fields: [supplierId], references: [id])
+  purchaseItems PurchaseItem[]
+  saleItems     SaleItem[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Purchase {
+  id         Int            @id @default(autoincrement())
+  date       DateTime       @default(now())
+  total      Decimal        @db.Decimal(10, 2)
+  supplierId Int
+  userId     Int
+  supplier   Supplier       @relation(fields: [supplierId], references: [id])
+  user       User           @relation(fields: [userId], references: [id])
+  items      PurchaseItem[]
+  createdAt  DateTime       @default(now())
+}
+
+model PurchaseItem {
+  id         Int      @id @default(autoincrement())
+  purchaseId Int
+  productId  Int
+  quantity   Int
+  costPrice  Decimal  @db.Decimal(10, 2)
+  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id])
+}
+
+model Sale {
+  id        Int        @id @default(autoincrement())
+  invoiceNo String     @unique
+  date      DateTime   @default(now())
+  total     Decimal    @db.Decimal(10, 2)
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id])
+  items     SaleItem[]
+  createdAt DateTime   @default(now())
+}
+
+model SaleItem {
+  id        Int      @id @default(autoincrement())
+  saleId    Int
+  productId Int
+  quantity  Int
+  price     Decimal  @db.Decimal(10, 2)
+  sale      Sale     @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id])
+}
