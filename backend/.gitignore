@@ -5,3 +5,5 @@ dist
 !*.example
 generated
 
+
+.vercel
