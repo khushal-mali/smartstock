@@ -1,0 +1,366 @@
+import os
+
+HTML_FILE = os.path.join(os.path.dirname(__file__), 'SmartStock_Report_Preview.html')
+
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartStock – BCA Project Report (Print Preview)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 1in 1in 1in 1.5in;
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 10pt;
+      }
+    }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #0f172a;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 20px;
+    }
+    .page-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 1in 1in 1in 1.5in;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+    .page-break {
+      page-break-before: always;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px dashed #cbd5e1;
+    }
+    h1.report-title {
+      font-size: 18pt;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    h1.chapter-title {
+      font-size: 16pt;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-size: 14pt;
+      font-weight: bold;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: #1e293b;
+    }
+    h3 {
+      font-size: 13pt;
+      font-weight: bold;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+    p {
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+    ul {
+      margin-bottom: 14px;
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 10pt;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #1e293b;
+      color: white;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    .figure-box {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .figure-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .figure-caption {
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #475569;
+      margin-top: 8px;
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: 9pt;
+      overflow-x: auto;
+      line-height: 1.3;
+    }
+    .center-text { text-align: center; }
+    .right-text { text-align: right; }
+    @media print {
+      body { background: white; padding: 0; }
+      .page-container { box-shadow: none; padding: 0; margin: 0; }
+      .page-break { border-top: none; margin-top: 0; padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-container">
+  <!-- TITLE PAGE -->
+  <div class="center-text" style="padding-top: 40px; padding-bottom: 60px;">
+    <p style="font-size: 14pt; font-weight: bold;">Project Report<br>On</p>
+    <h1 class="report-title">“SMARTSTOCK – INVENTORY MANAGEMENT SYSTEM”</h1>
+    <p style="font-size: 12pt;">Submitted to Uttaranchal University in partial fulfilment of the<br>requirements for the award of the Degree of</p>
+    <p style="font-size: 14pt; font-weight: bold;">BACHELOR OF COMPUTER APPLICATIONS<br>(BCA – SEMESTER V)</p>
+    
+    <div style="margin-top: 60px;">
+      <p style="font-weight: bold;">Submitted by:<br><span style="font-size: 13pt;">KHUSHAL ASARAM MALI</span><br>(Learner ID: 2413020402)</p>
+    </div>
+    
+    <div style="margin-top: 40px;">
+      <p style="font-weight: bold;">Under the Guidance of:<br><span style="font-size: 13pt;">MANISH VERMA</span><br>Full Stack Software Engineer<br>Thrivedge Edutech Pvt. Ltd.</p>
+    </div>
+
+    <div style="margin-top: 60px;">
+      <p style="font-size: 13pt; font-weight: bold;">CENTRE FOR DISTANCE AND ONLINE EDUCATION (CDOE)<br>UTTARANCHAL UNIVERSITY, DEHRADUN<br>NAAC Grade A+<br>Academic Session 2026</p>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ACKNOWLEDGEMENT -->
+  <h1 class="chapter-title">Acknowledgement</h1>
+  <p>I am deeply grateful to all those who have contributed to the successful completion of this project.</p>
+  <p>First and foremost, I would like to express my sincere gratitude to my guide, <strong>Manish Verma</strong> (Full Stack Software Engineer), for his invaluable guidance, constant support, and encouragement throughout the duration of this project. His industry expertise, technical rigor, and constructive feedback have significantly contributed to shaping the architecture, implementation, and quality of SmartStock, and I am truly thankful for his patience and insights.</p>
+  <p>I would also like to extend my heartfelt thanks to the <strong>Centre for Distance and Online Education (CDOE), Uttaranchal University</strong> for providing a conducive environment for learning, software development, and research. The curriculum, academic resources, and knowledge imparted by the faculty have been instrumental in the successful completion of this project work.</p>
+  <p>Lastly, I express my sincere appreciation to my family and colleagues for their persistent moral support and motivation during the development of this application.</p>
+  <div class="right-text" style="margin-top: 50px;">
+    <p><strong>Khushal Asaram Mali</strong><br>Learner ID: 2413020402<br>BCA Semester - V</p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- DECLARATION -->
+  <h1 class="chapter-title">Declaration</h1>
+  <p>I, <strong>Khushal Asaram Mali</strong>, declare that the project titled <strong>'SmartStock – Inventory Management System'</strong> is an original work carried out by me under the guidance of <strong>Manish Verma</strong> (Full Stack Software Engineer, Thrivedge Edutech Pvt. Ltd.).</p>
+  <p>The work presented in this project report has been developed in strict accordance with the guidelines of Uttaranchal University, Dehradun. The software components, database schemas, process logics, and test evaluations described herein are the result of my independent design and coding effort.</p>
+  <p>I further certify that this work is not copied from any existing report or published source, and no part of this project has been submitted elsewhere for the award of any other degree or diploma.</p>
+  <div class="right-text" style="margin-top: 60px;">
+    <p><strong>Signature of Learner:</strong> _____________________<br><br><strong>Name of Learner:</strong> Khushal Asaram Mali<br><strong>Learner ID:</strong> 2413020402<br><strong>Place:</strong> Kalyan<br><strong>Date:</strong> 18th November 2026</p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- CERTIFICATE -->
+  <h1 class="chapter-title">Certificate of Originality</h1>
+  <p>This is to certify that the project report entitled <strong>'SmartStock – Inventory Management System'</strong> submitted by <strong>Khushal Asaram Mali</strong> (Learner ID: 2413020402) in partial fulfillment of the requirements for the award of the Degree of Bachelor of Computer Applications (BCA Semester V) to Uttaranchal University, Dehradun, is an authentic record of original project work carried out under my supervision.</p>
+  <p>The software architecture, system analysis, relational database schemas, automated test executions, and user interface modules documented herein have been reviewed and verified. To the best of my knowledge, this work has not formed the basis for the award of any degree, diploma, associateship, or other similar title previously.</p>
+  <div style="margin-top: 60px;">
+    <p><strong>Guide Signature:</strong> _____________________<br><br>
+    <strong>Guide Name:</strong> Manish Verma<br>
+    <strong>Designation:</strong> Full Stack Software Engineer<br>
+    <strong>Organization:</strong> Thrivedge Edutech Pvt. Ltd.<br>
+    <strong>Date:</strong> 18th November 2026</p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- CHAPTER 1 -->
+  <h1 class="chapter-title">Chapter 1: Introduction</h1>
+  <p>In the contemporary commercial ecosystem, retail businesses, supply chains, and warehousing units face stringent operational demands requiring real-time visibility, rigorous accountability, and precise stock tracking. Traditional inventory control in small-to-medium retail enterprises (SMEs) and localized warehouses has predominantly relied on manual paper-based ledger registers or uncoupled, static spreadsheets. While these manual methods historically offered a nominal barrier to entry, they inherently suffer from critical systemic vulnerabilities: human transcription errors, delayed data synchronization, lack of concurrency controls, untracked stock shrinkage, and an acute vulnerability to out-of-stock scenarios.</p>
+  <p>The project, titled <strong>“SmartStock – Inventory Management System”</strong>, has been conceptualized, architected, and engineered to eradicate these systemic inefficiencies. Developed as an advanced three-tier web application, SmartStock centralizes product catalogs, category hierarchies, verified supplier profiles, procurement restocking (stock inflow), and point-of-sale billing (stock outflow) into a cohesive, transactionally safe software platform.</p>
+
+  <h2>1.1 Technology Stack & Three-Tier Architecture</h2>
+  <ul>
+    <li><strong>Frontend Tier:</strong> Next.js 16 (React 19, App Router) with Tailwind CSS and Lucide Icons.</li>
+    <li><strong>Backend Tier:</strong> NestJS (Node.js LTS, TypeScript) REST API with modular architecture.</li>
+    <li><strong>Database & ORM Tier:</strong> PostgreSQL 18 with Prisma 6 ORM executing atomic ACID transactions.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- CHAPTER 3: SYSTEM ANALYSIS & DIAGRAMS -->
+  <h1 class="chapter-title">Chapter 3: System Analysis & Visual Models</h1>
+  
+  <h2>3.5 Project Scheduling</h2>
+  <div class="figure-box">
+    <img src="diagrams/01_gantt_chart.png" alt="Gantt Chart">
+    <div class="figure-caption">Figure 3.1: SmartStock Gantt Chart Schedule (23 Days: 5 Nov to 27 Nov 2026)</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="diagrams/02_pert_chart.png" alt="PERT Chart">
+    <div class="figure-caption">Figure 3.2: SmartStock PERT Network Chart (Earliest | Latest Event Times)</div>
+  </div>
+
+  <h2>3.8 Visual Data Models</h2>
+  <div class="figure-box">
+    <img src="diagrams/03_use_case_diagram.png" alt="Use Case Diagram">
+    <div class="figure-caption">Figure 3.3: Use Case Diagram for SmartStock (Admin & Staff Roles)</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="diagrams/04_activity_diagram.png" alt="Activity Diagram">
+    <div class="figure-caption">Figure 3.4: Activity Diagram – Sales & Stock Deduction Process</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="diagrams/05_sequence_diagram.png" alt="Sequence Diagram">
+    <div class="figure-caption">Figure 3.5: Sequence Diagram – Atomic POS Sales Transaction</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="diagrams/06_class_diagram.png" alt="Class Diagram">
+    <div class="figure-caption">Figure 3.6: UML Class Diagram with Attributes, Methods, and Composition Multiplicity</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="diagrams/07_er_diagram.png" alt="ER Diagram">
+    <div class="figure-caption">Figure 3.7: Entity Relationship Diagram (ERD) with Primary & Foreign Keys (3NF Normalized)</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- CHAPTER 5: TESTING -->
+  <h1 class="chapter-title">Chapter 5: Testing & Verification</h1>
+  <h2>5.2 Automated Unit & Integration Test Results (Jest)</h2>
+  <pre>
+PASS  src/app.controller.spec.ts
+PASS  src/auth/auth.service.spec.ts
+PASS  src/products/products.service.spec.ts
+PASS  src/sales/sales.service.spec.ts
+PASS  src/reports/reports.service.spec.ts
+
+Test Suites: 5 passed, 5 total
+Tests:       15 passed, 15 total
+Snapshots:   0 total
+Time:        2.56 s
+Ran all test suites.
+  </pre>
+
+  <h2>5.3 Code Coverage Metrics</h2>
+  <ul>
+    <li><strong>AuthService:</strong> 100% Statements, 83.3% Branch, 100% Functions, 100% Lines</li>
+    <li><strong>SalesService:</strong> 83.8% Statements, 68.8% Branch, 75.0% Functions, 82.4% Lines</li>
+    <li><strong>ReportsService:</strong> 46.6% Statements, 55.6% Functions, 45.8% Lines</li>
+    <li><strong>ProductsService:</strong> 32.0% Statements, 57.1% Functions, 30.2% Lines</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- CHAPTER 8: SCREENSHOTS -->
+  <h1 class="chapter-title">Chapter 8: System Output & Real Application Screens</h1>
+
+  <div class="figure-box">
+    <img src="screenshots/01_login_screen.png" alt="Login Screen">
+    <div class="figure-caption">Figure 8.1: SmartStock Secure Login Portal with Demo Credential Fillers</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/02_dashboard_overview.png" alt="Dashboard">
+    <div class="figure-caption">Figure 8.2: Central Inventory KPI Dashboard & Low-Stock Warning Table</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/03_products_catalog.png" alt="Products Catalog">
+    <div class="figure-caption">Figure 8.3: Product Catalog with SKU Search, Category Filter, and Stock Badges</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/03b_add_product_modal.png" alt="Add Product Modal">
+    <div class="figure-caption">Figure 8.4: Add / Edit Product Modal Dialog with Threshold Settings</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/04_categories_management.png" alt="Categories">
+    <div class="figure-caption">Figure 8.5: Product Category Management Screen with Product Count Badges</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/05_suppliers_directory.png" alt="Suppliers">
+    <div class="figure-caption">Figure 8.6: Supplier & Vendor Directory with Contact Details</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/06_purchases_restocking.png" alt="Purchases">
+    <div class="figure-caption">Figure 8.7: Purchase Order Restocking Interface (Stock Inflow)</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/07_sales_pos_counter.png" alt="Sales POS">
+    <div class="figure-caption">Figure 8.8: Point of Sale (POS) Billing Counter with Live Stock Limit Validation</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/08_sales_invoice_modal.png" alt="Invoice Modal">
+    <div class="figure-caption">Figure 8.9: Official Printable Tax Invoice Modal with Itemized Breakdown</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/09_reports_stock_summary.png" alt="Stock Summary">
+    <div class="figure-caption">Figure 8.10: Stock Summary Financial Valuation Audit Report</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/10_reports_low_stock.png" alt="Low Stock Report">
+    <div class="figure-caption">Figure 8.11: Low-Stock Shortage Report with Deficit Quantities and Vendor Contacts</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/10b_reports_purchases.png" alt="Purchases Report">
+    <div class="figure-caption">Figure 8.12: Procurement Purchases Audit Report with Date-Range Filter</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/10c_reports_sales.png" alt="Sales Report">
+    <div class="figure-caption">Figure 8.13: Sales Revenue Audit Report with Invoice History</div>
+  </div>
+
+  <div class="figure-box">
+    <img src="screenshots/11_user_management.png" alt="User Management">
+    <div class="figure-caption">Figure 8.14: Admin User Management Panel for Provisioning Staff Credentials</div>
+  </div>
+
+</div>
+
+</body>
+</html>
+"""
+
+with open(HTML_FILE, 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print(f"HTML Preview generated successfully at: {HTML_FILE}")
+
