@@ -30,3 +30,14 @@ Thumbs.db
 
 # Prisma generated
 backend/generated/
+
+# Test coverage & temporary scripts
+backend/coverage/
+backend/capture_screenshots.js
+
+# Office lock files & temporary report helper scripts
+~$*
+report/*.ps1
+report/page_maps.json
+report/calc_pages.py
+report/build_full_report_docx.py
