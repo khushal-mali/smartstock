@@ -49,6 +49,6 @@ async function bootstrap() {
   console.log(`🚀 SmartStock API running on port ${port}`);
 }
 
-if (require.main === module) {
+if (!process.env.VERCEL && require.main === module) {
   bootstrap();
 }
